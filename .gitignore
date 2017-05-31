@@ -29,6 +29,8 @@ node_modules/
 # output
 output/
 output.tar.gz
+.DS_Store
+*.DS_Store*
 
 app/
 
