@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{controller.meta_title}}</title>
+  <link rel="stylesheet" href="/static/front/css/vendor.css">
+  <script src="/static/lib/dll.js"></script>
+  <script>
+  requirejs.config({
+    baseUrl: '/static/',
+    urlArgs: 'v=20170513',
+    paths: {}
+  });
+  </script>
+</head>
+
+<body>
+{% block content %}{% endblock %}
+</body>
+<script>
+require(['front/js/vendor']);
+</script>
+{% block script %}{% endblock %}
+</html>
