@@ -4,19 +4,36 @@
  * @type {Object}
  */
 export default {
-  type: 'mysql',
   adapter: {
-    mysql: {
+    dev: {
+      type: 'mysql',
       host: '127.0.0.1',
-      port: '3306',
-      database: 'OneOpen2017',
+      port: '',
+      database: 'thinkjs',
       user: 'root',
       password: '',
       prefix: '',
       encoding: 'utf8'
     },
-    mongo: {
-
+    stg: {
+      type: 'mysql',
+      host: '127.0.0.1',
+      port: '',
+      database: 'thinkjs',
+      user: 'root',
+      password: '',
+      prefix: '',
+      encoding: 'utf8'
+    },
+    prd: {
+      type: 'mysql',
+      host: '127.0.0.1',
+      port: '',
+      database: 'thinkjs',
+      user: 'root',
+      password: '',
+      prefix: '',
+      encoding: 'utf8'
     }
   }
 };

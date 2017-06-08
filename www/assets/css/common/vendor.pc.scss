@@ -1,0 +1,23 @@
+@import '../_inc/common.scss';
+a {
+  color: $font-color;
+  text-decoration: none;
+}
+
+input {
+  outline: none;
+  border-radius: 0;
+  background-color: inherit;
+  box-shadow: none;
+}
+
+.hidden {
+  display: none;
+}
+
+a,
+span,
+div,
+img {
+  user-select: none;
+}

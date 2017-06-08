@@ -1,0 +1,29 @@
+$font-size: 24px;
+@import '../_inc/common.scss';
+
+a {
+  color: $font-color;
+  text-decoration: none;
+  display: inline-block;
+}
+
+input {
+  outline: none;
+  border-radius: 0;
+  background-color: inherit;
+  box-shadow: none;
+}
+
+a,
+span,
+div,
+img {
+  /* 长按不要呼出默认菜单 */
+  -webkit-touch-callout: none;
+  /* 点击不要虚线框 */
+  -webkit-tap-highlight-color: transparent;
+  /* 不要选中文本 */
+  user-select: none;
+}
+
+
