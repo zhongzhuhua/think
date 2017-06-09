@@ -7,9 +7,11 @@ export default class extends think.controller.base {
     this.env = this.config('env');
     this.DeviceWidth = 640;
     this.meta_title = '首页';
+  };
 
+  async __before() {
     let hashConfig = await this.session('HashConfig');
-    if (hashConfig == null) {
+    if (hashConfig == null || this.env == 'dev') {
       hashConfig = {
         cssMmCommon: require('../../../www/rev/css.mm.common.json'),
         cssPcCommon: require('../../../www/rev/css.pc.common.json')

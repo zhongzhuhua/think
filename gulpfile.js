@@ -10,38 +10,7 @@ const rev = require('gulp-rev');
 const clean = require('gulp-clean');
 let env = 'dev';
 
-gulp.task('css:common:clean', () => {
-  return gulp.src('www/static/common/css')
-    .pipe(clean());
-});
-
-gulp.task('css:pc:common', () => {
-  gulp.src('www/assets/css/common/**/*.pc.scss')
-    .pipe(rev())
-    .pipe(cache(autoprefixer(configs.cssPC)))
-    .pipe(sass(configs.cssOutput))
-    .pipe(gulp.dest('www/static/common/css'))
-    .pipe(rev.manifest({
-      hash: true,
-      path: 'css.pc.common.json'
-    }))
-    .pipe(gulp.dest('www/rev'))
-});
-
-gulp.task('css:mm:common', () => {
-  gulp.src('www/assets/css/common/**/*.mm.scss')
-    .pipe(rev())
-    .pipe(cache(autoprefixer(configs.cssMM)))
-    .pipe(sass(configs.cssOutput))
-    .pipe(gulp.dest('www/static/common/css'))
-    .pipe(rev.manifest({
-      hash: true,
-      path: 'css.mm.common.json'
-    }))
-    .pipe(gulp.dest('www/rev'))
-});
-
-// 任务
+// 配置
 let configs = {
   // 打包公用样式
   commonCss: ['css:common:clean', 'css:pc:common', 'css:mm:common'],
@@ -60,6 +29,35 @@ let configs = {
     outputStyle: env == 'dev' ? 'expanded' : 'compressed'
   }
 };
+
+gulp.task('css:common:clean', () => {
+  return gulp.src('www/static/common/css')
+    .pipe(clean());
+});
+
+gulp.task('css:pc:common', () => {
+  gulp.src('www/assets/css/common/**/*.pc.scss')
+    .pipe(rev())
+    .pipe(cache(autoprefixer(configs.cssPC)))
+    .pipe(sass(configs.cssOutput))
+    .pipe(gulp.dest('www/static/common/css'))
+    .pipe(rev.manifest({
+      path: 'css.pc.common.json'
+    }))
+    .pipe(gulp.dest('www/rev'))
+});
+
+gulp.task('css:mm:common', () => {
+  gulp.src('www/assets/css/common/**/*.mm.scss')
+    .pipe(rev())
+    .pipe(cache(autoprefixer(configs.cssMM)))
+    .pipe(sass(configs.cssOutput))
+    .pipe(gulp.dest('www/static/common/css'))
+    .pipe(rev.manifest({
+      path: 'css.mm.common.json'
+    }))
+    .pipe(gulp.dest('www/rev'))
+});
 
 // 开发
 gulp.task('default', configs.commonCss);
