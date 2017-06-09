@@ -31,7 +31,10 @@ output/
 output.tar.gz
 .DS_Store
 *.DS_Store*
-
+www/rev
+www/static/lib
+www/static/common
+www/static/front
 
 app/
 
