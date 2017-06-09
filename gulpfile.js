@@ -30,6 +30,9 @@ let configs = {
   }
 };
 
+// 公用脚本
+
+// 公用样式
 gulp.task('css:common:clean', () => {
   return gulp.src('www/static/common/css')
     .pipe(clean());
