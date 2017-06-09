@@ -13,10 +13,11 @@ export default class extends think.controller.base {
     let hashConfig = await this.session('HashConfig');
     if (hashConfig == null || this.env == 'dev') {
       hashConfig = {
-        cssMmCommon: require('../../../www/rev/css.mm.common.json'),
-        cssPcCommon: require('../../../www/rev/css.pc.common.json'),
-        jsPcCommon: require('../../../www/rev/js.pc.common.json'),
-        jsMnCommon: require('../../../www/rev/js.mm.common.json')
+        cssMmCommon: JSON.parse(fs.readFileSync('www/rev/css.mm.common.json', 'utf8')),
+        cssPcCommon: JSON.parse(fs.readFileSync('www/rev/css.pc.common.json', 'utf8')),
+        jsPcCommon: JSON.parse(fs.readFileSync('www/rev/js.pc.common.json', 'utf8')),
+        jsMmCommon: JSON.parse(fs.readFileSync('www/rev/js.mm.common.json', 'utf8')),
+        js: JSON.parse(fs.readFileSync('www/rev/js.json', 'utf8'))
       };
       await this.session('HashConfig', hashConfig);
     }

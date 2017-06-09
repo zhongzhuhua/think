@@ -5,11 +5,13 @@ Application created by [ThinkJS](http://www.thinkjs.org)
 
 ```
 npm install
+gulp buildlib
 ```
 
 ## Start server
 
 ```
+gulp
 npm start
 ```
 
