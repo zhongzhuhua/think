@@ -31,6 +31,8 @@ output/
 output.tar.gz
 .DS_Store
 *.DS_Store*
+www/rev
+www/static
 
 app/
 

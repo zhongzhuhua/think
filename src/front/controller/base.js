@@ -1,11 +1,22 @@
 'use strict';
+import fs from 'fs';
 
 export default class extends think.controller.base {
-  init(http) {
+  async init(http) {
     super.init(http);
     this.env = this.config('env');
-    this.DeviceWidth = 720;
+    this.DeviceWidth = 640;
     this.meta_title = '首页';
+
+    let hashConfig = await this.session('HashConfig');
+    if (hashConfig == null) {
+      hashConfig = {
+        cssMmCommon: require('../../../www/rev/css.mm.common.json'),
+        cssPcCommon: require('../../../www/rev/css.pc.common.json')
+      };
+      await this.session('HashConfig', hashConfig);
+    }
+    this.hashConfig = hashConfig;
   };
 
   /** 

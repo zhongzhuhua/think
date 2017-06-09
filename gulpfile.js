@@ -6,6 +6,7 @@ const autoprefixer = require('gulp-autoprefixer');
 // compressed：压缩后的css代码。
 const sass = require('gulp-sass');
 const cache = require('gulp-cache');
+const rev = require('gulp-rev');
 let env = 'dev';
 
 gulp.task('css:pc:common', () => {
@@ -13,6 +14,11 @@ gulp.task('css:pc:common', () => {
     .pipe(cache(autoprefixer(configs.cssPC)))
     .pipe(sass(configs.cssOutput))
     .pipe(gulp.dest('www/static/common/css'))
+    .pipe(rev())
+    .pipe(rev.manifest({
+      path: 'css.pc.common.json'
+    }))
+    .pipe(gulp.dest('www/rev'))
 });
 
 gulp.task('css:mm:common', () => {
@@ -20,6 +26,14 @@ gulp.task('css:mm:common', () => {
     .pipe(cache(autoprefixer(configs.cssMM)))
     .pipe(sass(configs.cssOutput))
     .pipe(gulp.dest('www/static/common/css'))
+    .pipe(rev())
+    .pipe(rev.manifest({
+      hash: true,
+      preferOnline: true,
+      network: ['*'],
+      path: 'css.mm.common.json'
+    }))
+    .pipe(gulp.dest('www/rev'))
 });
 
 // 任务
