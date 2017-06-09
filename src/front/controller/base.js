@@ -14,7 +14,9 @@ export default class extends think.controller.base {
     if (hashConfig == null || this.env == 'dev') {
       hashConfig = {
         cssMmCommon: require('../../../www/rev/css.mm.common.json'),
-        cssPcCommon: require('../../../www/rev/css.pc.common.json')
+        cssPcCommon: require('../../../www/rev/css.pc.common.json'),
+        jsPcCommon: require('../../../www/rev/js.pc.common.json'),
+        jsMnCommon: require('../../../www/rev/js.mm.common.json')
       };
       await this.session('HashConfig', hashConfig);
     }
