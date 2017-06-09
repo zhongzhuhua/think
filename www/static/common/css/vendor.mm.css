@@ -1,12 +1,71 @@
 @charset "UTF-8";
-body, div, ul, li, h1, h2, h3, input, textarea, p, button, article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { margin: 0; padding: 0; vertical-align: baseline; }
+body,
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+input,
+textarea,
+p,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
 
-body { /* ios android winPhone 适配，注释掉的这句字体，在3种系统中，外观最接近 */ /*font-family: 'Helvetica Neue', Helvetica, STHeiti, sans-serif;*/ font-family: 'Microsoft YaHei', 'PingHei', 'Lucida Grande', 'Lucida Sans Unicode', 'STHeiti', 'Helvetica', 'Arial', 'Verdana', 'sans-serif'; color: #7a7c80; font-size: 24px; overflow-x: hidden; /* 关闭字体自动调整大小 */ -webkit-text-size-adjust: none; /* 滚动顺畅 */ -webkit-overflow-scrolling: touch; }
+body {
+  /* ios android winPhone 适配，注释掉的这句字体，在3种系统中，外观最接近 */
+  /*font-family: 'Helvetica Neue', Helvetica, STHeiti, sans-serif;*/
+  font-family: 'Microsoft YaHei', 'PingHei', 'Lucida Grande', 'Lucida Sans Unicode', 'STHeiti', 'Helvetica', 'Arial', 'Verdana', 'sans-serif';
+  color: #7a7c80;
+  font-size: 24px;
+  overflow-x: hidden;
+  /* 关闭字体自动调整大小 */
+  -webkit-text-size-adjust: none;
+  /* 滚动顺畅 */
+  -webkit-overflow-scrolling: touch;
+}
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
-a { color: #7a7c80; text-decoration: none; display: inline-block; }
+a {
+  color: #7a7c80;
+  text-decoration: none;
+  display: inline-block;
+}
 
-input { outline: none; -webkit-border-radius: 0; border-radius: 0; background-color: inherit; -webkit-box-shadow: none; box-shadow: none; }
+input {
+  outline: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 
-a, span, div, img { /* 长按不要呼出默认菜单 */ -webkit-touch-callout: none; /* 点击不要虚线框 */ -webkit-tap-highlight-color: transparent; /* 不要选中文本 */ -webkit-user-select: none; user-select: none; }
+a,
+span,
+div,
+img {
+  /* 长按不要呼出默认菜单 */
+  -webkit-touch-callout: none;
+  /* 点击不要虚线框 */
+  -webkit-tap-highlight-color: transparent;
+  /* 不要选中文本 */
+  -webkit-user-select: none;
+  user-select: none;
+}
