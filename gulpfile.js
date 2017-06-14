@@ -11,16 +11,18 @@ const clean = require('gulp-clean');
 const concat = require('gulp-concat');
 const babel = require('gulp-babel');
 const browserify = require('gulp-browserify');
+const babelify = require('babelify');
+const uglify = require('gulp-uglify');
 let env = 'dev';
 
 // 配置
 let configs = {
   // 打包公用样式
-  commonCss: ['css:common:clean', 'css:pc:common', 'css:mm:common'],
+  commonCss: ['css:common:compile'],
   // 打包公用脚本
-  commonJs: ['js:common:clean', 'js:pc:common', 'js:mm:common'],
+  commonJs: ['js:common:compile'],
   // 脚本
-  js: ['js:clean', 'js'],
+  js: ['js:compile'],
   // pc autoprefixer 兼容
   cssPC: {
     browsers: ['ie >= 8', 'Firefox > 10', 'chrome>1.0'],
@@ -38,6 +40,10 @@ let configs = {
 };
 
 // 脚本
+gulp.task('js:compile', ['js:clean'], () => {
+  gulp.start('js');
+});
+
 gulp.task('js:clean', () => {
   return gulp.src('./www/static/js/**/*.js')
     .pipe(clean());
@@ -45,7 +51,10 @@ gulp.task('js:clean', () => {
 
 gulp.task('js', () => {
   gulp.src('./www/assets/js/**/*.js')
-    .pipe(browserify())
+    .pipe(browserify({
+      transform: ['babelify'],
+      debug: env == 'dev'
+    }))
     .pipe(rev())
     .pipe(gulp.dest('./www/static/js'))
     .pipe(rev.manifest({
@@ -55,13 +64,17 @@ gulp.task('js', () => {
 });
 
 // 公用脚本
+gulp.task('js:common:compile', ['js:common:clean', 'js:mm:common'], () => {
+  gulp.start('js:pc:common');
+});
+
 gulp.task('js:common:clean', () => {
-  return gulp.src('./www/static/lib')
+  return gulp.src('./www/static/lib/**/*.js')
     .pipe(clean());
 });
 
 gulp.task('js:pc:common', () => {
-  gulp.src(['./www/assets/lib/jquery.js'])
+  return gulp.src(['./www/assets/lib/jquery.js'])
     .pipe(concat('dll.pc.js'))
     .pipe(rev())
     .pipe(gulp.dest('./www/static/lib'))
@@ -72,7 +85,7 @@ gulp.task('js:pc:common', () => {
 });
 
 gulp.task('js:mm:common', () => {
-  gulp.src(['./www/assets/lib/zepto.js'])
+  return gulp.src(['./www/assets/lib/zepto.js'])
     .pipe(concat('dll.mm.js'))
     .pipe(rev())
     .pipe(gulp.dest('./www/static/lib'))
@@ -83,6 +96,11 @@ gulp.task('js:mm:common', () => {
 });
 
 // 公用样式
+gulp.task('css:common:compile', ['css:common:clean'], () => {
+  gulp.start('css:pc:common');
+  gulp.start('css:mm:common')
+});
+
 gulp.task('css:common:clean', () => {
   return gulp.src('./www/static/css/common')
     .pipe(clean());
