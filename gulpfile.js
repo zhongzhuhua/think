@@ -51,10 +51,9 @@ gulp.task('js:clean', () => {
 
 gulp.task('js', () => {
   gulp.src('./www/assets/js/**/*.js')
-    .pipe(browserify({
-      transform: ['babelify'],
-      debug: env == 'dev'
-    }))
+    .pipe(cache(browserify({
+      transform: ['babelify']
+    })))
     .pipe(rev())
     .pipe(gulp.dest('./www/static/js'))
     .pipe(rev.manifest({
@@ -151,6 +150,8 @@ gulp.task('default', function() {
 gulp.task('watch', () => {
   gulp.watch('./www/assets/css/**/*.scss', configs.commonCss);
   gulp.watch('./www/assets/js/**/*.js', configs.js);
+  gulp.watch('./www/assets/components/**/*.js', configs.js);
+  gulp.watch('./www/assets/configs/**/*.js', configs.js);
 });
 
 // 打包上线

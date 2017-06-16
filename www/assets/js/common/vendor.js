@@ -3,7 +3,7 @@ import Toast from '../../components/Toast.js';
 class Vendor {
   constructor() {
     let name = 'ice';
-    console.log(new Toast());
+    console.log(new Toast().open());
 
     new Promise((res) => {
       console.log(name);
