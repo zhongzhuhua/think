@@ -1,19 +1,16 @@
+window.Promise = Promise;
 import Toast from '../../components/Toast.js';
 
 class Vendor {
   constructor() {
-    let name = 'ice';
-    console.log(new Toast().open());
-
     new Promise((res) => {
-      console.log(name);
+      console.log('vendor');
       setTimeout(() => {
         res();
       }, 2000);
     }).then(() => {
-      console.log('end');
+      console.log('vendor end');
     });
-
   };
 };
 

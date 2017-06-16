@@ -52,7 +52,8 @@ gulp.task('js:clean', () => {
 gulp.task('js', () => {
   gulp.src('./www/assets/js/**/*.js')
     .pipe(cache(browserify({
-      transform: ['babelify']
+      transform: ['babelify'],
+      debug: env == 'dev'
     })))
     .pipe(rev())
     .pipe(gulp.dest('./www/static/js'))
@@ -141,6 +142,7 @@ gulp.task('buildjs', () => {
 
 // 默认
 gulp.task('default', function() {
+  cache.clearAll();
   gulp.start(configs.commonCss);
   gulp.start(configs.commonJs);
   gulp.start(configs.js);
@@ -148,6 +150,7 @@ gulp.task('default', function() {
 
 // 开发
 gulp.task('watch', () => {
+  cache.clearAll();
   gulp.watch('./www/assets/css/**/*.scss', configs.commonCss);
   gulp.watch('./www/assets/js/**/*.js', configs.js);
   gulp.watch('./www/assets/components/**/*.js', configs.js);
