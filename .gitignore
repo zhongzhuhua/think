@@ -34,7 +34,7 @@ output.tar.gz
 www/rev
 www/static/lib
 www/static/common
-www/static/front
+www/static/css
 www/static/js
 
 app/
