@@ -36,12 +36,20 @@ let configs = {
   // 样式压缩格式
   cssOutput: {
     outputStyle: env == 'dev' ? 'expanded' : 'compressed'
+  },
+  // js 压缩配置
+  jsMini: {
+    drop_console: true
   }
 };
 
 // 脚本
 gulp.task('js:compile', ['js:clean'], () => {
-  gulp.start('js');
+  if (env == 'prd') {
+    gulp.start('js:mini');
+  } else {
+    gulp.start('js');
+  }
 });
 
 gulp.task('js:clean', () => {
@@ -63,6 +71,21 @@ gulp.task('js', () => {
     .pipe(gulp.dest('./www/rev'));
 });
 
+gulp.task('js:mini', () => {
+  gulp.src('./www/assets/js/**/*.js')
+    .pipe(cache(browserify({
+      transform: ['babelify'],
+      debug: env == 'dev'
+    })))
+    .pipe(uglify(configs.jsMini))
+    .pipe(rev())
+    .pipe(gulp.dest('./www/static/js'))
+    .pipe(rev.manifest({
+      path: 'js.json'
+    }))
+    .pipe(gulp.dest('./www/rev'));
+});
+
 // 公用脚本
 gulp.task('js:common:compile', ['js:common:clean', 'js:mm:common'], () => {
   gulp.start('js:pc:common');
@@ -75,6 +98,7 @@ gulp.task('js:common:clean', () => {
 
 gulp.task('js:pc:common', () => {
   return gulp.src(['./www/assets/lib/jquery.js'])
+    .pipe(uglify({}))
     .pipe(concat('dll.pc.js'))
     .pipe(rev())
     .pipe(gulp.dest('./www/static/lib'))
@@ -86,6 +110,7 @@ gulp.task('js:pc:common', () => {
 
 gulp.task('js:mm:common', () => {
   return gulp.src(['./www/assets/lib/zepto.js'])
+    .pipe(uglify({}))
     .pipe(concat('dll.mm.js'))
     .pipe(rev())
     .pipe(gulp.dest('./www/static/lib'))
